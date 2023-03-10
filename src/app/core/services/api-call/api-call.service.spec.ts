@@ -23,4 +23,20 @@ describe('ApiCallService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should have a get method', () => {
+    expect(service.get<any>).toBeDefined();
+  });
+
+  it('should have a post method', () => {
+    expect(service.post<any>).toBeDefined();
+  });
+
+  it('should have a patch method', () => {
+    expect(service.patch<any>).toBeDefined();
+  });
+
+  it('should have a delete method', () => {
+    expect(service.delete<any>).toBeDefined();
+  });
 });
