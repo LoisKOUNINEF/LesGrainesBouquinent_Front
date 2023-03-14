@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ENV } from 'src/environments/environments.provider';
 
 import { ApiCallService } from './api-call.service';
 
 describe('ApiCallService', () => {
   const env = { production: false }
-  let httpMock: HttpTestingController;
 
   let service: ApiCallService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule
+      ],
       providers: [
         {provide: ENV, useValue: env},
       ],
