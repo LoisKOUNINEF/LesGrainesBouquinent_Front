@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SharedModulesModule } from './shared-modules.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

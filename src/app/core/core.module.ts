@@ -4,7 +4,6 @@ import { ENV, getEnv } from 'src/environments/environments.provider';
 import { SharedModulesModule } from '../shared/modules/shared-modules.module';
 
 @NgModule({
-  declarations: [],
   imports: [
     SharedModulesModule,
   ],
