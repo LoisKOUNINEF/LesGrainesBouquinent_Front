@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ApiCallService } from './services/api-call/api-call.service';
 import { ENV, getEnv } from 'src/environments/environments.provider';
+import { SharedModulesModule } from '../shared/modules/shared-modules.module';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    SharedModulesModule,
   ],
   providers: [
     ApiCallService,
