@@ -25,7 +25,17 @@ describe('AuthService', () => {
     service = TestBed.inject(AuthService);
   });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  // describe('login request', () => {
+  //   it('should login user', () => {
+      
+  //   });
+  // });
 });
