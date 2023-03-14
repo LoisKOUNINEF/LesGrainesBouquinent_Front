@@ -27,4 +27,16 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Les Graines Bouquinent');
   });
+
+  it('should have a navbar component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+  });
+
+  it('should have a footer component', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-footer')).toBeTruthy();
+  });
 });
