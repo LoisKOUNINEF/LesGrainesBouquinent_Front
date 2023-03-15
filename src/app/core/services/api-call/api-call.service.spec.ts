@@ -1,13 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { fakeAsync, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ENV } from 'src/environments/environments.provider';
 
 import { ApiCallService } from './api-call.service';
+import { Environment } from 'src/environments/ienvironment';
 
 describe('ApiCallService', () => {
-  const env = { production: false }
+  let env: Environment = { production: false, apiUrl: 'localhost:3000' }
 
   let service: ApiCallService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,6 +20,12 @@ describe('ApiCallService', () => {
       ],
     });
     service = TestBed.inject(ApiCallService);
+  });
+
+  beforeEach(() => httpMock = TestBed.get(HttpTestingController));
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should be created', () => {
@@ -43,4 +51,32 @@ describe('ApiCallService', () => {
     expect(service.delete<any>).toBeDefined();
     expect(service.delete<any>).toBeInstanceOf(Function);
   });
+
+  it('should make a get request', fakeAsync(() => {
+    service.get('/users').subscribe()
+    const req = httpMock.expectOne(`${env.apiUrl}/users`)
+    expect(req.request.method).toBe('GET')
+    req.flush('flush');
+  }));
+
+  it('should make a post request', fakeAsync(() => {
+    service.post('/users/login').subscribe()
+    const req = httpMock.expectOne(`${env.apiUrl}/users/login`)
+    expect(req.request.method).toBe('POST')
+    req.flush('flush');
+  }));
+
+  it('should make a delete request', fakeAsync(() => {
+    service.delete('/users/randomString').subscribe()
+    const req = httpMock.expectOne(`${env.apiUrl}/users/randomString`)
+    expect(req.request.method).toBe('DELETE')
+    req.flush('flush');
+  }));
+  
+  it('should make a patch request', fakeAsync(() => {
+    service.patch('/users/randomString').subscribe();
+    const req = httpMock.expectOne(`${env.apiUrl}/users/randomString`);
+    expect(req.request.method).toBe('PATCH');
+    req.flush('flush');
+  }));
 });
