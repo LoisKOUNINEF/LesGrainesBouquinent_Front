@@ -6,7 +6,8 @@
     "module": "CommonJs",
     "types": [
       "jest"
-    ]
+    ],
+    "emitDecoratorMetadata": true,
   },
   "include": [
     "src/**/*.spec.ts",
