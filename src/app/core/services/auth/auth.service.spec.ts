@@ -1,12 +1,12 @@
 import { MockService } from 'ng-mocks';
-import { fakeAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { SharedModulesModule } from 'src/app/shared/modules/shared-modules.module';
 import { UserDTO } from '../../dto/user.dto';
 import { ApiCallService } from '../api-call/api-call.service';
 
 import { AuthService } from './auth.service';
 import { User } from '../../models/user.model';
-import { of } from 'rxjs';
+import { lastValueFrom, of } from 'rxjs';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -43,7 +43,7 @@ describe('AuthService', () => {
         password: "1234567890"
       }
       apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
-      const loggedIn = await service.login(userDto).toPromise();
+      const loggedIn = await lastValueFrom(service.login(userDto));
       expect(loggedIn!.name).toBe("lolo");
       expect(loggedIn!.email).toBe("lolo@yopmail.com");
       expect(apiCallServiceMock.post).toHaveBeenCalled();
