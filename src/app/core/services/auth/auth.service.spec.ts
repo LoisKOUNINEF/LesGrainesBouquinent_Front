@@ -46,7 +46,7 @@ describe('AuthService', () => {
   describe('login method', () => {
     it('should have a login method', () => {
       expect(service.login).toBeDefined();
-      expect(service.login).toBeInstanceOf(Function)
+      expect(service.login).toBeInstanceOf(Function);
     });
     it('should call ApiCallService post request', async () => {
       apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
@@ -60,7 +60,7 @@ describe('AuthService', () => {
   describe('signup method', () => {
     it('should have a signup method', () => {
       expect(service.signup).toBeDefined();
-      expect(service.signup).toBeInstanceOf(Function)
+      expect(service.signup).toBeInstanceOf(Function);
     });
     it('should call ApiCallService post request', async () => {
       apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
@@ -74,7 +74,7 @@ describe('AuthService', () => {
   describe('logout method', () => {
     it('should have a logout method', () => {
       expect(service.logout).toBeDefined();
-      expect(service.logout).toBeInstanceOf(Function)
+      expect(service.logout).toBeInstanceOf(Function);
     });
     it('should call ApiCallService post request', async () => {
       const msg = 'logged out';
@@ -82,6 +82,32 @@ describe('AuthService', () => {
       const loggedOut = await lastValueFrom(service.logout());
       expect(loggedOut).toBe('logged out');
       expect(apiCallServiceMock.post).toHaveBeenCalled();
+    });
+  });
+
+  describe('check auth status', () => {
+    it('should have a checkAuthStatus method', () => {
+      expect(service.checkAuthStatus).toBeDefined();
+      expect(service.checkAuthStatus).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService get request', async () => {
+      const status: boolean = false;
+      apiCallServiceMock.get = (jest.fn(() => of(status as  boolean))) as any;
+      service.checkAuthStatus();
+      expect(apiCallServiceMock.get).toHaveBeenCalled();
+    });
+  });
+
+  describe('check audmin status', () => {
+    it('should have a checkifAdmin method', () => {
+      expect(service.checkIfAdmin).toBeDefined();
+      expect(service.checkIfAdmin).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService get request', async () => {
+      const status: boolean = false;
+      apiCallServiceMock.get = (jest.fn(() => of(status as  boolean))) as any;
+      service.checkAuthStatus();
+      expect(apiCallServiceMock.get).toHaveBeenCalled();
     });
   });
 });

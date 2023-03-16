@@ -54,4 +54,28 @@ export class AuthService {
       })
     )
   }
+
+  public checkAuthStatus(): Observable<boolean> {
+    return this.apiCallService
+    .get(this.checkAuthUrl)
+    .pipe(
+      filter(res => !!res),
+      map((response: any) => {
+        this.isAuth = response;
+        return response;
+      })
+    );
+  }
+
+  public checkIfAdmin(): Observable<Result<boolean>> {
+    return this.apiCallService
+    .get(this.checkAdminUrl)
+    .pipe(
+      filter(res => !!res),
+      map((response: any) => {
+        this.isAdmin = response;
+        return response;
+      })
+    );
+  }
 }
