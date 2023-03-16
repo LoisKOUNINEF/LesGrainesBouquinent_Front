@@ -9,17 +9,32 @@ import { ApiCallService } from '../api-call/api-call.service';
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly usersUrl = '/users';
+  private readonly authUrl = '/auth';
+  private readonly pwdResetUrl = '/forgot-password/';
+  private readonly loginUrl = this.usersUrl + '/login';
+  private readonly logoutUrl = this.usersUrl + '/logout';
+  private readonly checkAuthUrl = this.authUrl + '/auth';
+  private readonly checkAdminUrl = this.authUrl + '/admin';
+  
+  public isAuth: boolean = false;
+  public isAdmin: boolean = false;
 
   constructor( private apiCallService: ApiCallService ) { }
 
   public login(userDto: UserDTO): Observable<User> {
     return this.apiCallService
-      .post<User>('/users/login', userDto)
+      .post<User>(this.loginUrl, userDto)
       .pipe(
       filter(res => !!res),
       map((response: any) => {
         return response;
       })
     );
+  }
+
+  public signup(userDto: UserDTO): Observable<User> {
+    return this.apiCallService
+    .post(this.usersUrl, userDto);
   }
 }
