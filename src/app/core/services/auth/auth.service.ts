@@ -28,6 +28,10 @@ export class AuthService {
       .pipe(
       filter(res => !!res),
       map((response: any) => {
+        if(response.isAdmin) {
+          this.isAdmin = true;
+        }
+        this.isAuth = true;
         return response;
       })
     );
@@ -36,5 +40,18 @@ export class AuthService {
   public signup(userDto: UserDTO): Observable<User> {
     return this.apiCallService
     .post(this.usersUrl, userDto);
+  }
+
+  public logout(): Observable<any> {
+    return this.apiCallService
+    .post(this.logoutUrl)
+    .pipe(
+      filter(res => !!res),
+      map((response: any) => {
+        this.isAdmin = false;
+        this.isAuth = false;
+        return response;
+      })
+    )
   }
 }

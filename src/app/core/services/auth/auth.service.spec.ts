@@ -16,7 +16,7 @@ describe('AuthService', () => {
     email: "lolo@yopmail.com",
     name: "lolo",
     password: "1234567890"
-  }
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,11 +36,13 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
   describe('apiCallServiceMock', () => {
     it('should be defined', () => {
       expect(apiCallServiceMock).toBeDefined();
     });
   });
+
   describe('login method', () => {
     it('should have a login method', () => {
       expect(service.login).toBeDefined();
@@ -54,6 +56,7 @@ describe('AuthService', () => {
       expect(apiCallServiceMock.post).toHaveBeenCalled();
     })
   });
+
   describe('signup method', () => {
     it('should have a signup method', () => {
       expect(service.signup).toBeDefined();
@@ -64,6 +67,20 @@ describe('AuthService', () => {
       const signedUp = await lastValueFrom(service.signup(userDto));
       expect(signedUp.name).toBe("lolo");
       expect(signedUp.email).toBe("lolo@yopmail.com");
+      expect(apiCallServiceMock.post).toHaveBeenCalled();
+    });
+  });
+
+  describe('logout method', () => {
+    it('should have a logout method', () => {
+      expect(service.logout).toBeDefined();
+      expect(service.logout).toBeInstanceOf(Function)
+    });
+    it('should call ApiCallService post request', async () => {
+      const msg = 'logged out';
+      apiCallServiceMock.post = (jest.fn(() => of(msg))) as any;
+      const loggedOut = await lastValueFrom(service.logout());
+      expect(loggedOut).toBe('logged out');
       expect(apiCallServiceMock.post).toHaveBeenCalled();
     });
   });
