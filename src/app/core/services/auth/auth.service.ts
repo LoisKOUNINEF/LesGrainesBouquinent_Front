@@ -78,4 +78,14 @@ export class AuthService {
       })
     );
   }
+
+  public sendPwdResetLink(userDto: UserDTO): Observable<any> {
+    return this.apiCallService
+    .post(this.pwdResetUrl, userDto);
+  }
+
+  public resetPwd(userDto: UserDTO, token: string) {
+    return this.apiCallService
+    .post(`${this.pwdResetUrl}${token}`, userDto);
+  }
 }

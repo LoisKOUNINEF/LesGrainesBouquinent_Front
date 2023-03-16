@@ -110,4 +110,29 @@ describe('AuthService', () => {
       expect(apiCallServiceMock.get).toHaveBeenCalled();
     });
   });
+
+  describe('send password reset link method', () => {
+    it('should have a sendPwdResetLink method', () => {
+      expect(service.sendPwdResetLink).toBeDefined();
+      expect(service.sendPwdResetLink).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService post request', async () => {
+      apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
+      service.sendPwdResetLink(userDto);
+      expect(apiCallServiceMock.post).toHaveBeenCalled();
+    })
+  });
+
+  describe('reset password method', () => {
+    it('should have a resetPwd method', () => {
+      expect(service.resetPwd).toBeDefined();
+      expect(service.resetPwd).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService post request', async () => {
+      const token = 'token';
+      apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
+      service.resetPwd(userDto, token);
+      expect(apiCallServiceMock.post).toHaveBeenCalled();
+    })
+  });
 });
