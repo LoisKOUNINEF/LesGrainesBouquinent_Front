@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, filter, map } from 'rxjs';
+import { Observable, filter, map, BehaviorSubject } from 'rxjs';
 import { UserDTO } from '../../dto/user.dto';
 import { Result } from '../../models/shared/result.model';
 import { User } from '../../models/user.model';
@@ -17,8 +17,8 @@ export class AuthService {
   private readonly checkAuthUrl = this.authUrl + '/auth';
   private readonly checkAdminUrl = this.authUrl + '/admin';
   
-  public isAuth: boolean = false;
-  public isAdmin: boolean = false;
+  public isAuth: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor( private apiCallService: ApiCallService ) { }
 
@@ -29,9 +29,9 @@ export class AuthService {
       filter(res => !!res),
       map((response: any) => {
         if(response.isAdmin) {
-          this.isAdmin = true;
+          this.isAdmin.next(true);
         }
-        this.isAuth = true;
+        this.isAuth.next(true);
         return response;
       })
     );
@@ -48,8 +48,8 @@ export class AuthService {
     .pipe(
       filter(res => !!res),
       map((response: any) => {
-        this.isAdmin = false;
-        this.isAuth = false;
+        this.isAdmin.next(false);
+        this.isAuth.next(false);
         return response;
       })
     )
@@ -61,19 +61,19 @@ export class AuthService {
     .pipe(
       filter(res => !!res),
       map((response: any) => {
-        this.isAuth = response;
+        this.isAuth.next(response);
         return response;
       })
     );
   }
 
-  public checkIfAdmin(): Observable<Result<boolean>> {
+  public checkIfAdmin(): Observable<boolean> {
     return this.apiCallService
     .get(this.checkAdminUrl)
     .pipe(
       filter(res => !!res),
       map((response: any) => {
-        this.isAdmin = response;
+        this.isAdmin.next(response);
         return response;
       })
     );
