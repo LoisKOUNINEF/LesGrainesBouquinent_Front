@@ -9,7 +9,7 @@ declare let $: any;
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
+    styleUrls: ['./app.component.css'],
     providers: [
         Location, {
             provide: LocationStrategy,
@@ -51,9 +51,9 @@ export class AppComponent {
 
     checkUserStatus() {
       this.authSubscription = 
-        this.authService.isAuth.subscribe();
+        this.authService.checkAuthStatus().subscribe();
       this.adminSubscription =
-        this.authService.isAdmin.subscribe();
+        this.authService.checkIfAdmin().subscribe();
       this.subscriptions.push(this.adminSubscription, this.authSubscription);
     }
 
