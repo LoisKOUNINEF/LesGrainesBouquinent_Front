@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { NavbarComponent } from './navbar.component';
 import { Router } from '@angular/router';
 import { lastValueFrom, of } from 'rxjs';
+import { FixNavigationTriggeredOutsideAngularZoneNgModule } from 'tests/FixNavigationTriggeredOutsideAngularZoneNgModule';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -14,6 +15,7 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FixNavigationTriggeredOutsideAngularZoneNgModule],
       declarations: [ NavbarComponent ],
       providers: [
         {
