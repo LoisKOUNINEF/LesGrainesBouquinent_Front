@@ -9,6 +9,13 @@ import { User } from '../../models/user.model';
 import { lastValueFrom, of } from 'rxjs';
 
 describe('AuthService', () => {
+  let usersUrl = '/users';
+  let authUrl = '/auth';
+  let pwdResetUrl = '/forgot-password/';
+  let loginUrl = usersUrl + '/login';
+  let logoutUrl = usersUrl + '/logout';
+  let checkAuthUrl = authUrl + '/auth';
+  let checkAdminUrl = authUrl + '/admin';
   let service: AuthService;
   let apiCallServiceMock = MockService(ApiCallService);
 
@@ -54,6 +61,7 @@ describe('AuthService', () => {
       expect(loggedIn.name).toBe("lolo");
       expect(loggedIn.email).toBe("lolo@yopmail.com");
       expect(apiCallServiceMock.post).toHaveBeenCalled();
+      expect(apiCallServiceMock.post).toHaveBeenCalledWith(loginUrl, userDto);
     })
   });
 
@@ -68,6 +76,7 @@ describe('AuthService', () => {
       expect(signedUp.name).toBe("lolo");
       expect(signedUp.email).toBe("lolo@yopmail.com");
       expect(apiCallServiceMock.post).toHaveBeenCalled();
+      expect(apiCallServiceMock.post).toHaveBeenCalledWith(usersUrl, userDto);
     });
   });
 
@@ -82,6 +91,7 @@ describe('AuthService', () => {
       const loggedOut = await lastValueFrom(service.logout());
       expect(loggedOut).toBe('logged out');
       expect(apiCallServiceMock.post).toHaveBeenCalled();
+      expect(apiCallServiceMock.post).toHaveBeenCalledWith(logoutUrl);
     });
   });
 
@@ -96,6 +106,7 @@ describe('AuthService', () => {
     it('should call ApiCallService get request', async () => {
       service.checkAuthStatus();
       expect(apiCallServiceMock.get).toHaveBeenCalled();
+      expect(apiCallServiceMock.get).toHaveBeenCalledWith(checkAuthUrl);
     });
     it('should return true', async () => {
       const isAuth = await lastValueFrom(service.checkAuthStatus())
@@ -114,6 +125,7 @@ describe('AuthService', () => {
     it('should call ApiCallService get request', () => {
       service.checkIfAdmin()
       expect(apiCallServiceMock.get).toHaveBeenCalled();
+      expect(apiCallServiceMock.get).toHaveBeenCalledWith(checkAdminUrl);
     });
     it('should return true', async () => {
       const isAdmin = await lastValueFrom(service.checkIfAdmin())
@@ -143,6 +155,7 @@ describe('AuthService', () => {
       apiCallServiceMock.post = (jest.fn(() => of(userDto as User))) as any;
       service.resetPwd(userDto, token);
       expect(apiCallServiceMock.post).toHaveBeenCalled();
+      expect(apiCallServiceMock.post).toHaveBeenCalledWith(`${pwdResetUrl}${token}`, userDto);
     })
   });
 });
