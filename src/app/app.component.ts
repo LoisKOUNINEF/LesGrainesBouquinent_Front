@@ -21,7 +21,7 @@ export class AppComponent {
     title = 'Les Graines Bouquinent';
 
     location: any;
-    routerSubscription: any;
+    routerSubscription: Subscription = new Subscription;
     adminSubscription: Subscription = new Subscription;
     authSubscription: Subscription = new Subscription;
     subscriptions: Subscription[] = [];
