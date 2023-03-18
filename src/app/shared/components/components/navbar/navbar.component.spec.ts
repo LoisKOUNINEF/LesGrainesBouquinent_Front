@@ -50,7 +50,7 @@ describe('NavbarComponent', () => {
       expect(component.logout).toBeInstanceOf(Function);
     });
     it('should call Auth Service logout method', async () => {
-      const loggedOut = await lastValueFrom(authServiceMock.logout());
+      await lastValueFrom(authServiceMock.logout());
       expect(authServiceMock.logout).toHaveBeenCalled();
     });
     it('should redirect to home page', () => {
