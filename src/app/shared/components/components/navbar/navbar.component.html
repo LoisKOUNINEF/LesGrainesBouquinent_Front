@@ -1,1 +1,14 @@
-<p>navbar works!</p>
+<div>
+	<ng-container *ngIf="!(auth.isAdmin | async); then UserNavbar"></ng-container>
+	<ng-container *ngIf="(auth.isAdmin | async); then AdminNavbar"></ng-container>
+</div>
+<ng-template #UserNavbar>
+	<div>
+		user navbar works !
+	</div>
+</ng-template>
+<ng-template #AdminNavbar>
+	<div>
+		admin navbar works !
+	</div>
+</ng-template>
