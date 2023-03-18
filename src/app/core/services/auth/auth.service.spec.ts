@@ -7,6 +7,7 @@ import { ApiCallService } from '../api-call/api-call.service';
 import { AuthService } from './auth.service';
 import { User } from '../../models/user.model';
 import { lastValueFrom, of } from 'rxjs';
+import { UserStub } from 'tests/stub-dto/user.stub';
 
 describe('AuthService', () => {
   let usersUrl = '/users';
@@ -19,11 +20,7 @@ describe('AuthService', () => {
   let service: AuthService;
   let apiCallServiceMock = MockService(ApiCallService);
 
-  const userDto: UserDTO = {
-    email: "lolo@yopmail.com",
-    name: "lolo",
-    password: "1234567890"
-  };
+  const userDto = new UserStub;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
