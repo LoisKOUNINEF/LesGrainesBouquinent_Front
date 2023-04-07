@@ -56,4 +56,46 @@ describe('BooksService', () => {
       expect(booksList[0].title).toBe('La nuit des temps');
     });
   });
+
+  describe('findOneById method', () => {
+    it('should have a findOneById method', () => {
+      expect(service.findOneById).toBeDefined();
+      expect(service.findOneById).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService get method', async () => {
+      apiCallServiceMock.get = (jest.fn(() => of(books[0] as Book))) as any;
+      const book = await lastValueFrom(service.findOneById(books[0].id));
+      expect(apiCallServiceMock.get).toHaveBeenCalled();
+      expect(apiCallServiceMock.get).toHaveBeenCalledWith(`${booksUrl}/${books[0].id}`);
+      expect(book.title).toBe(books[0].title)
+    });
+  });
+
+  describe('update method', () => {
+    it('should have an update method', () => {
+      expect(service.update).toBeDefined();
+      expect(service.update).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService patch method', async () => {
+      apiCallServiceMock.patch = (jest.fn(() => of(bookDto as Book))) as any;
+      const book = await lastValueFrom(service.update(books[1].id, bookDto));
+      expect(apiCallServiceMock.patch).toHaveBeenCalled();
+      expect(apiCallServiceMock.patch).toHaveBeenCalledWith(`${booksUrl}/${books[1].id}`, bookDto);
+      expect(book.title).toBe(bookDto.title)
+    });
+  });
+
+  describe('delete method', () => {
+    it('should have a delete method', () => {
+      expect(service.delete).toBeDefined();
+      expect(service.delete).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService delete method', async () => {
+      apiCallServiceMock.delete = (jest.fn(() => of('deleted' as any))) as any;
+      const book = await lastValueFrom(service.delete(books[0].id));
+      expect(apiCallServiceMock.delete).toHaveBeenCalled();
+      expect(apiCallServiceMock.delete).toHaveBeenCalledWith(`${booksUrl}/${books[0].id}`);
+      expect(book).toBe('deleted');
+    });
+  });
 });
