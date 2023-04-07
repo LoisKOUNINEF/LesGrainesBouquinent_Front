@@ -94,4 +94,18 @@ describe('UsersService', () => {
       expect(user.name).toBe(users[0].name)
     });
   });
+
+  describe('update method', () => {
+    it('should have an update method', () => {
+      expect(service.update).toBeDefined();
+      expect(service.update).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService patch method', async () => {
+      apiCallServiceMock.patch = (jest.fn(() => of(userDto as User))) as any;
+      const user = await lastValueFrom(service.update(userDto, users[1].id));
+      expect(apiCallServiceMock.patch).toHaveBeenCalled();
+      expect(apiCallServiceMock.patch).toHaveBeenCalledWith(`${usersUrl}/${users[1].id}`, userDto);
+      expect(user.name).toBe(userDto.name)
+    });
+  });
 });

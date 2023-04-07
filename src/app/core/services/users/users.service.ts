@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserDTO } from '../../dto/user.dto';
 import { User } from '../../models/user.model';
 import { ApiCallService } from '../api-call/api-call.service';
 
@@ -22,5 +23,9 @@ export class UsersService {
 
   findOneById(id: string): Observable<User> {
     return this.apiCallService.get<User>(`${this.usersUrl}/${id}`)
+  }
+
+  update(userDto: UserDTO, id: string): Observable<User> {
+    return this.apiCallService.patch(`${this.usersUrl}/${id}`, userDto)
   }
 }
