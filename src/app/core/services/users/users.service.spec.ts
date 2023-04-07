@@ -64,4 +64,18 @@ describe('UsersService', () => {
       expect(usersList[0].name).toBe('lolo');
     });
   });
+
+  describe('findOneByEmail method', () => {
+    it('should have a findOneByEmail method', () => {
+      expect(service.findOneByEmail).toBeDefined();
+      expect(service.findOneByEmail).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService get method', async () => {
+      apiCallServiceMock.get = (jest.fn(() => of(users[0] as User))) as any;
+      const user = await lastValueFrom(service.findOneByEmail(users[0].email));
+      expect(apiCallServiceMock.get).toHaveBeenCalled();
+      expect(apiCallServiceMock.get).toHaveBeenCalledWith(`${usersUrl}?email=${users[0].email}`);
+      expect(user.name).toBe(users[0].name)
+    });
+  });
 });

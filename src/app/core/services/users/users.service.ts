@@ -13,6 +13,10 @@ export class UsersService {
   constructor(private apiCallService: ApiCallService) { }
 
   findAll(): Observable<User[]> {
-    return this.apiCallService.get(this.usersUrl);
+    return this.apiCallService.get<User[]>(this.usersUrl);
+  }
+
+  findOneByEmail(email: string): Observable<User> {
+    return this.apiCallService.get<User>(`${this.usersUrl}?email=${email}`)
   }
 }
