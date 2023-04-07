@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MockService } from 'ng-mocks';
 import { lastValueFrom, of } from 'rxjs';
 import { SharedModulesModule } from 'src/app/shared/modules/shared-modules.module';
+import { mockUsers } from 'tests/mock-arrays/mock-users-array';
 import { UserStub } from 'tests/stub-dto/user.stub';
 import { User } from '../../models/user.model';
 import { ApiCallService } from '../api-call/api-call.service';
@@ -13,18 +14,7 @@ describe('UsersService', () => {
   let apiCallServiceMock = MockService(ApiCallService);
 
   const userDto = new UserStub;
-  const users = [
-    {
-      id: 'randomString1',
-      name: 'lolo', 
-      email: 'lolo@yopmail.com',
-    },
-    {
-      id: 'randomString2',
-      name: 'lolo2', 
-      email: 'lolo2@yopmail.com',
-    }
-  ];
+  const users = mockUsers;
   const usersUrl = '/users';
 
   beforeEach(() => {
