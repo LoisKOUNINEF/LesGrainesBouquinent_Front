@@ -51,6 +51,8 @@ describe('BooksService', () => {
     it('should call ApiCallService post method', async () => {
       apiCallServiceMock.post = (jest.fn(() => of(bookDto as BookDTO))) as any;
       const book = await lastValueFrom(service.create(bookDto));
+      expect(apiCallServiceMock.post).toHaveBeenCalled();
+      expect(apiCallServiceMock.post).toHaveBeenCalledWith(booksUrl, bookDto);
       expect(book.title).toBe(bookDto.title)
     });
   });
