@@ -1,7 +1,6 @@
 import { MockService } from 'ng-mocks';
 import { TestBed } from '@angular/core/testing';
 import { SharedModulesModule } from 'src/app/shared/modules/shared-modules.module';
-import { UserDTO } from '../../dto/user.dto';
 import { ApiCallService } from '../api-call/api-call.service';
 
 import { AuthService } from './auth.service';
