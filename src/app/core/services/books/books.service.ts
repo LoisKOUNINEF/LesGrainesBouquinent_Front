@@ -27,15 +27,15 @@ export class BooksService {
     return this.apiCallService.get<Book[]>(this.booksUrl);
   }
 
-  findOneById(id: string): Observable<Book> {
+  findOneById(id: Book['id']): Observable<Book> {
     return this.apiCallService.get<Book>(`${this.booksUrl}/${id}`)
   }
 
-  update(id: string, bookDto: BookDTO): Observable<Book> {
+  update(id: Book['id'], bookDto: BookDTO): Observable<Book> {
     return this.apiCallService.patch<Book>(`${this.booksUrl}/${id}`, bookDto)
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: Book['id']): Observable<any> {
     return this.apiCallService.delete<Book>(`${this.booksUrl}/${id}`)
   }
 }

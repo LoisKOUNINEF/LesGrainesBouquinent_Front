@@ -17,19 +17,19 @@ export class UsersService {
     return this.apiCallService.get<User[]>(this.usersUrl);
   }
 
-  findOneByEmail(email: string): Observable<User> {
+  findOneByEmail(email: User['email']): Observable<User> {
     return this.apiCallService.get<User>(`${this.usersUrl}?email=${email}`)
   }
 
-  findOneById(id: string): Observable<User> {
+  findOneById(id: User['id']): Observable<User> {
     return this.apiCallService.get<User>(`${this.usersUrl}/${id}`)
   }
 
-  update(userDto: UserDTO, id: string): Observable<User> {
+  update(userDto: UserDTO, id: User['id']): Observable<User> {
     return this.apiCallService.patch<User>(`${this.usersUrl}/${id}`, userDto)
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: User['id']): Observable<any> {
     return this.apiCallService.delete<User>(`${this.usersUrl}/${id}`)
   }
 }
