@@ -108,4 +108,18 @@ describe('UsersService', () => {
       expect(user.name).toBe(userDto.name)
     });
   });
+
+  describe('delete method', () => {
+    it('should have a delete method', () => {
+      expect(service.delete).toBeDefined();
+      expect(service.delete).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService delete method', async () => {
+      apiCallServiceMock.delete = (jest.fn(() => of('deleted' as any))) as any;
+      const user = await lastValueFrom(service.delete(users[0].id));
+      expect(apiCallServiceMock.delete).toHaveBeenCalled();
+      expect(apiCallServiceMock.delete).toHaveBeenCalledWith(`${usersUrl}/${users[0].id}`);
+      expect(user).toBe('deleted');
+    });
+  });
 });
