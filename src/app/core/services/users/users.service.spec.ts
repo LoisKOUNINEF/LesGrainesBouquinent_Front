@@ -15,10 +15,12 @@ describe('UsersService', () => {
   const userDto = new UserStub;
   const users = [
     {
+      id: 'randomString1',
       name: 'lolo', 
       email: 'lolo@yopmail.com',
     },
     {
+      id: 'randomString2',
       name: 'lolo2', 
       email: 'lolo2@yopmail.com',
     }
@@ -75,6 +77,20 @@ describe('UsersService', () => {
       const user = await lastValueFrom(service.findOneByEmail(users[0].email));
       expect(apiCallServiceMock.get).toHaveBeenCalled();
       expect(apiCallServiceMock.get).toHaveBeenCalledWith(`${usersUrl}?email=${users[0].email}`);
+      expect(user.name).toBe(users[0].name)
+    });
+  });
+
+  describe('findOneById method', () => {
+    it('should have a findOneById method', () => {
+      expect(service.findOneById).toBeDefined();
+      expect(service.findOneById).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService get method', async () => {
+      apiCallServiceMock.get = (jest.fn(() => of(users[0] as User))) as any;
+      const user = await lastValueFrom(service.findOneById(users[0].id));
+      expect(apiCallServiceMock.get).toHaveBeenCalled();
+      expect(apiCallServiceMock.get).toHaveBeenCalledWith(`${usersUrl}/${users[0].id}`);
       expect(user.name).toBe(users[0].name)
     });
   });

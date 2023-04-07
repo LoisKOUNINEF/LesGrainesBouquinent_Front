@@ -19,4 +19,8 @@ export class UsersService {
   findOneByEmail(email: string): Observable<User> {
     return this.apiCallService.get<User>(`${this.usersUrl}?email=${email}`)
   }
+
+  findOneById(id: string): Observable<User> {
+    return this.apiCallService.get<User>(`${this.usersUrl}/${id}`)
+  }
 }
