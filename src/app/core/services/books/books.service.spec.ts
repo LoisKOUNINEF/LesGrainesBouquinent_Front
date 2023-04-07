@@ -4,6 +4,7 @@ import { lastValueFrom, of } from 'rxjs';
 import { SharedModulesModule } from 'src/app/shared/modules/shared-modules.module';
 import { mockBooks } from 'tests/mock-arrays/mock-books-array';
 import { BookStub } from 'tests/stub-dto/book.stub';
+import { BookDTO } from '../../dto/book.dto';
 import { Book } from '../../models/book.model';
 import { ApiCallService } from '../api-call/api-call.service';
 
@@ -39,6 +40,18 @@ describe('BooksService', () => {
   describe('apiCallServiceMock', () => {
     it('should be defined', () => {
       expect(apiCallServiceMock).toBeDefined();
+    });
+  });
+
+  describe('create method', () => {
+    it('should have a create method', () => {
+      expect(service.create).toBeDefined();
+      expect(service.create).toBeInstanceOf(Function);
+    });
+    it('should call ApiCallService post method', async () => {
+      apiCallServiceMock.post = (jest.fn(() => of(bookDto as BookDTO))) as any;
+      const book = await lastValueFrom(service.create(bookDto));
+      expect(book.title).toBe(bookDto.title)
     });
   });
 

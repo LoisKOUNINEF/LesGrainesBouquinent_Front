@@ -13,6 +13,10 @@ export class BooksService {
 
   constructor(private apiCallService: ApiCallService) { }
 
+  create(bookDto: BookDTO): Observable<Book> {
+    return this.apiCallService.post<Book>(this.booksUrl, bookDto)
+  }
+
   findAll(title?: Book['title'], author?: Book['author']): Observable<Book[]> {
     if(title) {
       return this.apiCallService.get<Book[]>(`${this.booksUrl}?title=${title}`);
@@ -24,14 +28,14 @@ export class BooksService {
   }
 
   findOneById(id: string): Observable<Book> {
-    return this.apiCallService.get(`${this.booksUrl}/${id}`)
+    return this.apiCallService.get<Book>(`${this.booksUrl}/${id}`)
   }
 
   update(id: string, bookDto: BookDTO): Observable<Book> {
-    return this.apiCallService.patch(`${this.booksUrl}/${id}`, bookDto)
+    return this.apiCallService.patch<Book>(`${this.booksUrl}/${id}`, bookDto)
   }
 
   delete(id: string): Observable<any> {
-    return this.apiCallService.delete(`${this.booksUrl}/${id}`)
+    return this.apiCallService.delete<Book>(`${this.booksUrl}/${id}`)
   }
 }
