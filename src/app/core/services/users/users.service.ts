@@ -26,10 +26,10 @@ export class UsersService {
   }
 
   update(userDto: UserDTO, id: string): Observable<User> {
-    return this.apiCallService.patch(`${this.usersUrl}/${id}`, userDto)
+    return this.apiCallService.patch<User>(`${this.usersUrl}/${id}`, userDto)
   }
 
   delete(id: string): Observable<any> {
-    return this.apiCallService.delete(`${this.usersUrl}/${id}`)
+    return this.apiCallService.delete<User>(`${this.usersUrl}/${id}`)
   }
 }
