@@ -1,1 +1,51 @@
-<p>login works!</p>
+<div class="container">
+	<h2 class="auth-title">
+		Se connecter.
+	</h2>
+	<div class="container">
+    <p title="En vous connectant, vous pourrez ajouter de nouveaux livres, écrire des commentaires...">Vous devez être connecté pour bénéficier de toutes les fonctionnalités du site.</p>
+    <p>Si vous n'avez pas encore de profil, vous pouvez en <a routerLink="/auth/signup"><strong><u>créer un</u></strong></a></p>
+    <form [formGroup]="loginForm">
+    	<div class="form-class email">
+				<label class="label">
+					E-Mail
+				</label>
+				<input 
+					type="email" 
+					id="email" 
+					placeholder="E-Mail" 
+					class="form-input" 
+					formControlName="email" 
+					required
+				>
+				<span *ngIf="controls.email?.touched && (controls.email?.hasError('required') || controls.email?.invalid)">
+					Email requis.
+				</span>
+			</div>
+			<div class="form-class password">
+				<label class="label">
+				Mot de passe
+				</label>
+				<input 
+					type="password" 
+					id="password" 
+					placeholder="Mot de passe" 
+					class="form-input" 
+					formControlName="password" 
+					required
+				>
+				<span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
+					Mot de passe requis (10 caractères minimum).
+				</span>
+			</div>
+			<div class="form-class submit">
+				<a (click)="login()">
+					<button [disabled]="!loginForm.valid" type="submit" class="submit">
+						💻 Se Connecter
+					</button>
+				</a>
+				<a routerLink="/auth/reset-password"><p style="text-decoration: underline; font-size: small;">(Mot de passe oublié ? Clique ici)</p></a>
+			</div>
+    </form>
+  </div>
+</div>

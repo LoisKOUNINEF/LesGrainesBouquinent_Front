@@ -45,9 +45,9 @@ export class SignupComponent {
 
   signup(): Subscription | Promise<boolean> {
     if (!this.signupForm.valid) {
-      return this.router.navigate(['signup']);
+      return this.router.navigate(['auth/signup']);
     }; 
-    
+
     const user = new UserDTO(this.signupForm.value as UserFormValue);
 
     return this.subscription = this.auth.signup(user)

@@ -63,7 +63,7 @@ describe('SignupComponent', () => {
     it('should redirect to signup page', () => {
       jest.spyOn(router, 'navigate');
       component.signup();
-      expect(router.navigate).toHaveBeenCalledWith(['signup']);
+      expect(router.navigate).toHaveBeenCalledWith(['auth/signup']);
     });
 
     describe('name input field', () => {
