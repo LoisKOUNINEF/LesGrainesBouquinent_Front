@@ -11,7 +11,7 @@
     		<strong><u>créer un</u></strong>
     	</a>
     </p>
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (submit)="login()">
     	<div class="form-class email">
 				<label class="label">
 					E-Mail
@@ -50,11 +50,9 @@
 				</span>
 			</div>
 			<div class="form-class submit">
-				<a (click)="login()">
-					<button [disabled]="!loginForm.valid" type="submit" class="submit">
-						💻 Se Connecter
-					</button>
-				</a>
+				<button [disabled]="!loginForm.valid" type="submit" class="submit">
+					💻 Se Connecter
+				</button>
 				<a (click)="goToResetPassword()">
 					<p class="forgotten-password">
 						(Mot de passe oublié ? Clique ici)

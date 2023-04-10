@@ -7,7 +7,7 @@
 			<strong><u>vous connecter directement.</u></strong>
 		</a>
 	</p>
-	<form [formGroup]="signupForm">
+	<form [formGroup]="signupForm" (submit)="signup()">
 		<div class="form-class name">
 			<label class="label">
 				Nom
@@ -62,11 +62,9 @@
 			</span>
 		</div>
 		<div class="form-class submit">
-			<a (click)="signup()">
-				<button [disabled]="!signupForm.valid" type="submit" class="submit">
-					💻 S'enregistrer
-				</button>
-			</a>
+			<button [disabled]="!signupForm.valid" type="submit" class="submit">
+				💻 S'enregistrer
+			</button>
 		</div>
 	</form>
 </div>
