@@ -1,1 +1,26 @@
-<p>send-reset-link works!</p>
+<div>
+  <div>
+      <h1>Mot de passe oublié ?</h1>
+  </div>
+  
+  <div>
+    <form [formGroup]="pwdResetLinkForm" (submit)="sendPwdResetLink()">
+        <div>
+          <label>
+          	E-mail
+          </label>
+          <input 
+          formControlName="email" 
+          required 
+          type="email" 
+          placeholder="Votre e-mail" 
+          >
+        </div>
+        <div>
+          <button type="submit">
+          	Recevoir un lien de réinitialisation
+          </button>
+        </div>
+    </form>
+  </div>
+</div>
