@@ -23,4 +23,20 @@ export class CommentsService {
       }
     );
   }
+
+  findAll(): Observable<Comment[]> {
+    return this.apiCallService.get<Comment[]>(this.commentsUrl);
+  }
+
+  findOneById(id: Comment['id']): Observable<Comment> {
+    return this.apiCallService.get<Comment>(`${this.commentsUrl}/${id}`)
+  }
+
+  update(id: Comment['id'], commentDto: CommentDTO): Observable<Comment> {
+    return this.apiCallService.patch<Comment>(`${this.commentsUrl}/${id}`, commentDto)
+  }
+
+  delete(id: Comment['id']): Observable<any> {
+    return this.apiCallService.delete<Comment>(`${this.commentsUrl}/${id}`)
+  }
 }
