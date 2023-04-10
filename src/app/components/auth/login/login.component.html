@@ -21,7 +21,8 @@
 					id="email" 
 					placeholder="E-Mail" 
 					class="form-input" 
-					formControlName="email" 
+					formControlName="email"
+					autofocus 
 					required
 				>
 				<span *ngIf="controls.email?.touched && (controls.email?.hasError('required') || controls.email?.invalid)">
