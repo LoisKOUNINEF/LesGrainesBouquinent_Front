@@ -11,7 +11,7 @@
     		<strong><u>créer un</u></strong>
     	</a>
     </p>
-    <form [formGroup]="loginForm" (submit)="login()">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
     	<div class="form-class email">
 				<label class="label">
 					E-Mail

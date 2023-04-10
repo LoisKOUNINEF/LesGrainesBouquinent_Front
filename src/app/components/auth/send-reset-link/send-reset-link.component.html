@@ -4,7 +4,7 @@
   </div>
   
   <div>
-    <form [formGroup]="pwdResetLinkForm" (submit)="sendPwdResetLink()">
+    <form [formGroup]="pwdResetLinkForm" (ngSubmit)="sendPwdResetLink()">
         <div>
           <label>
           	E-mail
