@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { UserDTO, UserFormValue } from 'src/app/core/dto/user.dto';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { revealPassword } from 'src/app/shared/helpers/reveal-password';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   auth: any;
   subscription: Subscription = new Subscription;
+  revealPassword = revealPassword;
 
   loginForm = this.formBuilder.group({
     email: new FormControl('',[
@@ -45,12 +47,20 @@ export class LoginComponent implements OnInit {
     return this.subscription = this.auth.login(user)
       .subscribe((res: User) => {
         if (this.authService.isAdmin) {
-          this.router.navigate(['admin'])
+          this.router.navigate(['admin']);
         } else {
-        this.router.navigate(['books'])
+        this.router.navigate(['books']);
         };
       }
     );
+  }
+
+  goToResetPassword() {
+    this.router.navigate(['auth/reset-password']);
+  }
+
+  goToSignup() {
+    this.router.navigate(['auth/signup']);
   }
   
   ngOnDestroy() {

@@ -5,6 +5,7 @@ import { filter, Subscription } from 'rxjs';
 import { UserDTO, UserFormValue } from 'src/app/core/dto/user.dto';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { revealPassword } from 'src/app/shared/helpers/reveal-password';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,7 @@ export class SignupComponent {
 
   auth: any;
   subscription: Subscription = new Subscription;
+  revealPassword = revealPassword;
 
   signupForm = this.formBuilder.group({
     name: new FormControl('',[
@@ -39,7 +41,8 @@ export class SignupComponent {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() { this.auth = this.authService }
 
@@ -58,6 +61,10 @@ export class SignupComponent {
           this.router.navigate(['books'])
       }) 
     })
+  }
+
+  goToLogin() {
+    this.router.navigate(['auth/login']);
   }
 
   ngOnDestroy() {

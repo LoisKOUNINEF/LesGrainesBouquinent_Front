@@ -4,7 +4,7 @@
 	</h2>
 	<div class="container">
     <p title="En vous connectant, vous pourrez ajouter de nouveaux livres, écrire des commentaires...">Vous devez être connecté pour bénéficier de toutes les fonctionnalités du site.</p>
-    <p>Si vous n'avez pas encore de profil, vous pouvez en <a routerLink="/auth/signup"><strong><u>créer un</u></strong></a></p>
+    <p>Si vous n'avez pas encore de profil, vous pouvez en <a (click)="goToSignup()"><strong><u>créer un</u></strong></a></p>
     <form [formGroup]="loginForm">
     	<div class="form-class email">
 				<label class="label">
@@ -34,6 +34,7 @@
 					formControlName="password" 
 					required
 				>
+				<input type="checkbox" (click)="revealPassword()">Montrer le mot de passe
 				<span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
 					Mot de passe requis (10 caractères minimum).
 				</span>
@@ -44,7 +45,7 @@
 						💻 Se Connecter
 					</button>
 				</a>
-				<a routerLink="/auth/reset-password">
+				<a (click)="goToResetPassword()">
 					<p class="forgotten-password">
 						(Mot de passe oublié ? Clique ici)
 					</p>
