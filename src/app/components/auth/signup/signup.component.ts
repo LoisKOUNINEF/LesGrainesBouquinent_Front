@@ -5,6 +5,7 @@ import { filter, Subscription } from 'rxjs';
 import { UserDTO, UserFormValue } from 'src/app/core/dto/user.dto';
 import { User } from 'src/app/core/models/user.model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { checkPasswords } from 'src/app/shared/helpers/check-passwords';
 import { revealPassword } from 'src/app/shared/helpers/reveal-password';
 
 @Component({
@@ -17,6 +18,7 @@ export class SignupComponent {
   auth: any;
   subscription: Subscription = new Subscription;
   revealPassword = revealPassword;
+  checkPasswords = checkPasswords;
 
   signupForm = this.formBuilder.group({
     name: new FormControl('',[
@@ -30,7 +32,12 @@ export class SignupComponent {
     password: new FormControl('',[
       Validators.minLength(10)
     ]),
-  });
+    confirmPassword: [''],
+    }, 
+    { 
+      validators: this.checkPasswords,
+    }
+  );
 
   controls = {
     name: this.signupForm.get('name'),

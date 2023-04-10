@@ -1,8 +1,11 @@
 export function revealPassword() {
-    const input = (<HTMLInputElement>document.getElementById("password"));
-    if (input.type === "password") {
-      input.type = "text";
+    const password = (<HTMLInputElement>document.getElementById("password"));
+    const confirm = (<HTMLInputElement>document.getElementById("confirm"));
+    if (password.type === "password") {
+      password.type = "text";
+      confirm.type = "text";
     } else {
-      input.type = "password";
+      password.type = "password";
+      confirm.type = "password";
     }
   } 
