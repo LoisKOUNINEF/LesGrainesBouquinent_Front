@@ -44,19 +44,20 @@ export class SignupComponent {
   ngOnInit() { this.auth = this.authService }
 
   signup(): Subscription | Promise<boolean> {
-    if (this.signupForm.valid) {
-      const user = new UserDTO(this.signupForm.value as UserFormValue);
+    if (!this.signupForm.valid) {
+      return this.router.navigate(['signup']);
+    }; 
+    
+    const user = new UserDTO(this.signupForm.value as UserFormValue);
 
-      return this.subscription = this.auth.signup(user)
+    return this.subscription = this.auth.signup(user)
       .pipe(filter(res => !!res))
       .subscribe((res: User) => {
         this.authService.login(user)
         .subscribe(() => {
           this.router.navigate(['books'])
-        }) 
-      })
-    }; 
-    return this.router.navigate(['signup']);
+      }) 
+    })
   }
 
   ngOnDestroy() {

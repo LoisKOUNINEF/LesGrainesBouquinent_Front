@@ -59,17 +59,13 @@ describe('SignupComponent', () => {
       await lastValueFrom(authServiceMock.signup(userDto));
       expect(authServiceMock.signup).toHaveBeenCalled();
     });
+
     it('should redirect to signup page', () => {
       jest.spyOn(router, 'navigate');
       component.signup();
       expect(router.navigate).toHaveBeenCalledWith(['signup']);
     });
-    // it('should redirect to books page', async () => {
-    //   jest.spyOn(router, 'navigate');
 
-    //   component.signup();
-    //   expect(router.navigate).toHaveBeenCalledWith(['books']);
-    // });
     describe('name input field', () => {
       it('shoud have an input element with class form-class for name field', () => {
         const el = fixture.debugElement.query(By.css('.form-class.name'));
