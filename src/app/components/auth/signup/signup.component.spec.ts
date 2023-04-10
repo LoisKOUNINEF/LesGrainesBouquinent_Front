@@ -59,7 +59,6 @@ describe('SignupComponent', () => {
       await lastValueFrom(authServiceMock.signup(userDto));
       expect(authServiceMock.signup).toHaveBeenCalled();
     });
-
     it('should redirect to signup page', () => {
       jest.spyOn(router, 'navigate');
       component.signup();
@@ -78,6 +77,21 @@ describe('SignupComponent', () => {
         expect(el.nativeElement.getAttribute('class')).toEqual('form-input');
         expect(el.nativeElement.getAttribute('formControlName')).toEqual('name');
       });
+      it('should mark name invalid if empty', () => {
+        const name = component.signupForm.get('name');
+        name?.setValue(null);
+        expect(name?.valid).toBeFalsy();
+      });
+      it('should mark name invalid if less than 4 char long', () => {
+        const name = component.signupForm.get('name');
+        name?.setValue('12');
+        expect(name?.valid).toBeFalsy();
+      });
+      it('should mark name valid if it is at least 4 char long', () => {
+        const name = component.signupForm.get('name');
+        name?.setValue('lolo');
+        expect(name?.valid).toBeTruthy();
+      });
     });
     
     describe('email input field', () => {
@@ -92,6 +106,21 @@ describe('SignupComponent', () => {
         expect(el.nativeElement.getAttribute('class')).toEqual('form-input');
         expect(el.nativeElement.getAttribute('formControlName')).toEqual('email');
       });
+      it('should mark email invalid if empty', () => {
+        const email = component.signupForm.get('email');
+        email?.setValue(null);
+        expect(email?.valid).toBeFalsy();
+      });
+      it('should mark email invalid if not in email format', () => {
+        const email = component.signupForm.get('email');
+        email?.setValue('loloyopmail.com');
+        expect(email?.valid).toBeFalsy();
+      });
+      it('should mark email valid if email format', () => {
+        const email = component.signupForm.get('email');
+        email?.setValue('lolo@yopmail.com');
+        expect(email?.valid).toBeTruthy();
+      });
     });
 
     describe('password input field', () => {
@@ -105,6 +134,16 @@ describe('SignupComponent', () => {
         expect(el.nativeElement.getAttribute('id')).toEqual('password');
         expect(el.nativeElement.getAttribute('class')).toEqual('form-input');
         expect(el.nativeElement.getAttribute('formControlName')).toEqual('password');
+      });
+      it('should mark password invalid if less than 10 char long', () => {
+        const password = component.signupForm.get('password');
+        password?.setValue('12345678');
+        expect(password?.valid).toBeFalsy();
+      });
+      it('should mark password valid if at least 10 char long', () => {
+        const password = component.signupForm.get('password');
+        password?.setValue('1234567890');
+        expect(password?.valid).toBeTruthy();
       });
     });
 
