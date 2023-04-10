@@ -43,6 +43,7 @@ export class SignupComponent {
     name: this.signupForm.get('name'),
     email: this.signupForm.get('email'),
     password: this.signupForm.get('password'),
+    confirmPassword: this.signupForm.get('confirmPassword')
   }
 
   constructor(
