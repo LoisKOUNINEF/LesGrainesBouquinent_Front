@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() { this.auth = this.authService }
 
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
         if (this.authService.isAdmin) {
           this.router.navigate(['admin']);
         } else {
-        this.router.navigate(['books']);
+          this.router.navigate(['books']);
         };
       }
     );

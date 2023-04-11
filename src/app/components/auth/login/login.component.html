@@ -41,14 +41,16 @@
 					formControlName="password" 
 					required
 				>
+				<span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
+					Mot de passe requis (10 caractères minimum).
+				</span>
+			</div>
+			<div>
 				<input 
 				type="checkbox"
 				class="reveal-password" 
 				(click)="revealPassword()"
 				>Montrer le mot de passe
-				<span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
-					Mot de passe requis (10 caractères minimum).
-				</span>
 			</div>
 			<div class="form-class submit">
 				<button [disabled]="!loginForm.valid" type="submit" class="submit">

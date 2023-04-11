@@ -53,6 +53,9 @@
 				formControlName="password" 
 				required
 			>
+			<span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
+				Mot de passe requis (10 caractères minimum).
+			</span>
 		</div>
 		<div>
 			<label class="label">
@@ -65,13 +68,10 @@
         formControlName="confirmPassword" 
         required
       >
+      <span *ngIf="controls.confirmPassword?.touched && controls.name?.valid && signupForm.invalid">
+				Les mots de passe ne sont pas identiques.			
+			</span>
     </div>
-    <span *ngIf="controls.password?.touched && (controls.password?.hasError('required') || controls.password?.invalid)">
-				Mot de passe requis (10 caractères minimum).
-		</span>
-		<span *ngIf="controls.confirmPassword?.touched && controls.name?.valid && signupForm.invalid">
-			Les mots de passe ne sont pas identiques.			
-		</span>
     <div>
 			<input 
 			type="checkbox" 
