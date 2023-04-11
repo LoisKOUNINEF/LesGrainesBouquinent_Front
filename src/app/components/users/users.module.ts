@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { SharedModulesModule } from 'src/app/shared/modules/shared-modules.module';
+import { UsersRoutingModule } from './users-routing.module';
 
 
 
@@ -13,7 +14,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     UserDetailsComponent
   ],
   imports: [
-    CommonModule
+    SharedModulesModule,
+    UsersRoutingModule,
   ]
 })
 export class UsersModule { }
