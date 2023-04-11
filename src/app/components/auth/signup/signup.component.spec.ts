@@ -148,6 +148,12 @@ describe('SignupComponent', () => {
     });
 
     describe('confirm password input field', () => {
+      beforeEach(() => {
+        const name = component.signupForm.get('name');
+        const email = component.signupForm.get('email');
+        name?.setValue(userDto.name);
+        email?.setValue(userDto.email);
+      });
       it('shoud have an input element with class form-class for confirm field', () => {
       const el = fixture.debugElement.query(By.css('.form-class.confirm'));
       expect(el).toBeTruthy();
@@ -160,10 +166,6 @@ describe('SignupComponent', () => {
         expect(el.nativeElement.getAttribute('formControlName')).toEqual('confirmPassword');
       });
       it('should mark that passwords do not match', () => {
-        const name = component.signupForm.get('name');
-        const email = component.signupForm.get('email');
-        name?.setValue(userDto.name);
-        email?.setValue(userDto.email);
         const password = component.signupForm.get('password');
         const confirm = component.signupForm.get('confirmPassword');
         password?.setValue('1234567890');
@@ -171,10 +173,6 @@ describe('SignupComponent', () => {
         expect(component.signupForm.valid).toBeFalsy();
       });
       it('should be valid if passwords match', () => {
-        const name = component.signupForm.get('name');
-        const email = component.signupForm.get('email');
-        name?.setValue(userDto.name);
-        email?.setValue(userDto.email);
         const password = component.signupForm.get('password');
         const confirm = component.signupForm.get('confirmPassword');
         password?.setValue('1234567890');
