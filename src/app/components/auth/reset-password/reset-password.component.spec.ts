@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockService } from 'ng-mocks';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { FixNavigationTriggeredOutsideAngularZoneNgModule } from 'tests/FixNavigationTriggeredOutsideAngularZoneNgModule';
-import { UserStub } from 'tests/stub-dto/user.stub';
 
 import { ResetPasswordComponent } from './reset-password.component';
 
@@ -13,8 +12,6 @@ describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
   let authServiceMock = MockService(AuthService);
-  let router: Router;
-  const userDto = new UserStub;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,7 +30,6 @@ describe('ResetPasswordComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(ResetPasswordComponent);
-    router = TestBed.get(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
