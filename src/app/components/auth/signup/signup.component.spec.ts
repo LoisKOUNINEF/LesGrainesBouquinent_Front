@@ -147,6 +147,42 @@ describe('SignupComponent', () => {
       });
     });
 
+    describe('confirm password input field', () => {
+      it('shoud have an input element with class form-class for confirm field', () => {
+      const el = fixture.debugElement.query(By.css('.form-class.confirm'));
+      expect(el).toBeTruthy();
+      });
+      it('should have confirm form attributes', () => {
+        const el = fixture.debugElement.query(By.css('.confirm input.form-input'))
+        expect(el.nativeElement.getAttribute('type')).toEqual('password');
+        expect(el.nativeElement.getAttribute('id')).toEqual('confirm');
+        expect(el.nativeElement.getAttribute('class')).toEqual('form-input');
+        expect(el.nativeElement.getAttribute('formControlName')).toEqual('confirmPassword');
+      });
+      it('should mark that passwords do not match', () => {
+        const name = component.signupForm.get('name');
+        const email = component.signupForm.get('email');
+        name?.setValue(userDto.name);
+        email?.setValue(userDto.email);
+        const password = component.signupForm.get('password');
+        const confirm = component.signupForm.get('confirmPassword');
+        password?.setValue('1234567890');
+        confirm?.setValue('0912345678');
+        expect(component.signupForm.valid).toBeFalsy();
+      });
+      it('should be valid if passwords match', () => {
+        const name = component.signupForm.get('name');
+        const email = component.signupForm.get('email');
+        name?.setValue(userDto.name);
+        email?.setValue(userDto.email);
+        const password = component.signupForm.get('password');
+        const confirm = component.signupForm.get('confirmPassword');
+        password?.setValue('1234567890');
+        confirm?.setValue('1234567890');
+        expect(component.signupForm.valid).toBeTruthy();
+      });
+    });
+
     describe('submit button', () => {
       it('shoud have a submit button', () => {
       const el = fixture.debugElement.query(By.css('.form-class.submit'));
