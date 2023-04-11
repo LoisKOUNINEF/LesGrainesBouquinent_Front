@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './components/auth/auth.module';
+import { BooksModule } from './components/books/books.module';
 import { CoreModule } from './core/core.module';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 
@@ -17,6 +18,7 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
     SharedComponentsModule,
     CoreModule,
     AuthModule,
+    BooksModule,
     AppRoutingModule
   ],
   providers: [ 
