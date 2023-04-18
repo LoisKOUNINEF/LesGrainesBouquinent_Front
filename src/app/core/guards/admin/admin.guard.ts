@@ -23,7 +23,7 @@ export class AdminGuard implements CanActivate {
         if(res) {
           resolve(true);
         } else {
-          this.router.navigate(['login']);
+          this.router.navigate(['auth/login']);
           resolve(false);
         }
         this.subscription.unsubscribe();
