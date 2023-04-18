@@ -1,15 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from 'src/app/core/guards/admin/admin.guard';
-import { UsersListComponent } from '../users/users-list/users-list.component';
+import { ManageBooksComponent } from './manage-books/manage-books.component';
+import { ManageCommentsComponent } from './manage-comments/manage-comments.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 
 
 const adminRoutes: Routes = [
   { path: 'admin', canActivate: [AdminGuard], children: [
       {
-        path: 'users-list', 
-        component: UsersListComponent},
+        path: 'manage-users', 
+        component: ManageUsersComponent,
+      },
+      {
+        path: 'manage-books',
+        component: ManageBooksComponent,
+      },
+      {
+        path: 'manage-comments/:bookid',
+        component: ManageCommentsComponent,
+      }
     ]
   }
 ]
